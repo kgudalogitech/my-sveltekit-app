@@ -16,7 +16,7 @@
             <CartItem {...item}/>
         {/each}
        </div>
-       <div class="font-bold uppercase p-6 gap-6">
+       <div class="font-bold uppercase p-6 gap-6 pt-20">
           Total Price : {total}
        </div>
     </div>
