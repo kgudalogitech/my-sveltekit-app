@@ -2,10 +2,13 @@
     import { cartOpen } from "$lib/stores/cartOpen";
     import { cartItems } from "$lib/stores/cartItems";
     import { fly } from "svelte/transition";
+    import { fade } from "svelte/transition"
 	import CartItem from "./CartItem.svelte";
+	import Backdrop from "./Backdrop.svelte";
     $: total = Object.values($cartItems).reduce((accumulator, currentItem) => accumulator + currentItem.price, 0).toFixed(2);
 </script>
 {#if $cartOpen}
+    <Backdrop />
     <div transition:fly={{ x: "100%" }} class="fixed border-l top-0 right-0 h-full w-[350px] bg-white">
         <div class="bg-black text-white flex p-3 justify-between">
             Cart
@@ -16,8 +19,10 @@
             <CartItem {...item}/>
         {/each}
        </div>
-       <div class="font-bold uppercase p-6 gap-6 pt-20">
-          Total Price : {total}
-       </div>
+       {#if Object.values($cartItems).length > 0}
+        <div class="font-bold uppercase p-6 gap-6 pt-20">
+            Total Price : {total}
+        </div>
+       {/if}
     </div>
 {/if}
